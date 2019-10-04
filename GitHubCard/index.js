@@ -1,5 +1,4 @@
 
-const cardEntryPoint = document.querySelector('.cards');
 /* Step 1: using axios, send a GET request to the following URL 
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
@@ -30,9 +29,16 @@ axios.get('https://api.github.com/users/falmatad').then(response => {
           Using that array, iterate over it, requesting data for each user, creating a new card for each
           user, and adding that card to the DOM.
 */
-
-const followersArray = [];
-
+const followersArray = ['theolamide', 'sjeremich23', 'adamwinzdesign', 'donutwizard666', 'viewgo'];
+followersArray.forEach(item => {
+  axios
+      .get(`https://api.github.com/users/${item}`).then(response => {
+        const theirInfo = response.data;
+        console.log(theirInfo);
+        console.log(gitComponent(theirInfo));
+        gitUser.appendChild(gitComponent(theirInfo));
+      });
+})
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
 
@@ -97,7 +103,6 @@ function gitComponent(data) {
   userInfoCard.classList.add("card-info");
   name.classList.add("name");
   usrName.classList.add('username');
-
 
   
   return userCard;
